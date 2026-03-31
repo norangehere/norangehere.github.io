@@ -328,48 +328,21 @@
         }
 
         /* Honors */
-        .honors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 0.75rem;
-        }
-
-        .honor-item {
+        .honors-list {
             display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
-        .honor-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: var(--accent-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+        .honors-list li {
+            font-size: 0.95rem;
+            color: var(--text);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .honor-icon svg {
-            width: 16px;
-            height: 16px;
-            color: var(--accent);
-        }
-
-        .honor-item h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.15rem;
-        }
-
-        .honor-item p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .honors-list li:last-child {
+            border-bottom: none;
         }
 
         /* Projects */
@@ -773,62 +746,14 @@
                     <h2>Awards & Honors</h2>
                     <div class="line"></div>
                 </div>
-                <div class="honors-grid">
-                    <div class="honor-item">
-                        <div class="honor-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
-                        </div>
-                        <div>
-                            <h4>Huawei Elite Scholarship</h4>
-                            <p>Only 3 recipients in college</p>
-                        </div>
-                    </div>
-                    <div class="honor-item">
-                        <div class="honor-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
-                        </div>
-                        <div>
-                            <h4>China International Innovation Competition</h4>
-                            <p>2024 National Bronze Award</p>
-                        </div>
-                    </div>
-                    <div class="honor-item">
-                        <div class="honor-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M12 7c1.11 0 2.08.402 2.599 1M12 7V4m0 3c0 1.11-.402 2.08-1 2.599M7 7c0-1.11.402-2.08 1-2.599M7 7V4m0 3c0 1.11-.402 2.08-1 2.599" /></svg>
-                        </div>
-                        <div>
-                            <h4>Zhejiang Provincial Government Scholarship</h4>
-                            <p>Awarded twice consecutively</p>
-                        </div>
-                    </div>
-                    <div class="honor-item">
-                        <div class="honor-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-                        </div>
-                        <div>
-                            <h4>Mathematical Contest in Modeling</h4>
-                            <p>2024 M Award (Meritorious Winner)</p>
-                        </div>
-                    </div>
-                    <div class="honor-item">
-                        <div class="honor-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                        </div>
-                        <div>
-                            <h4>Top-tier Foundation Scholarship</h4>
-                            <p>Computer Science</p>
-                        </div>
-                    </div>
-                    <div class="honor-item">
-                        <div class="honor-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
-                        </div>
-                        <div>
-                            <h4>National High School Mathematics Competition</h4>
-                            <p>2020 Provincial First Prize</p>
-                        </div>
-                    </div>
-                </div>
+                <ul class="honors-list">
+                    <li>Huawei Elite Scholarship — Only 3 recipients in college (2024)</li>
+                    <li>China International "Internet+" Innovation Competition — National Bronze Award (2024)</li>
+                    <li>Zhejiang Provincial Government Scholarship (2023, 2024)</li>
+                    <li>MCM/ICM Mathematical Contest in Modeling — Meritorious Winner (2024)</li>
+                    <li>Top-tier Foundation Scholarship, Computer Science (2023)</li>
+                    <li>National High School Mathematics Competition — Provincial First Prize (2020)</li>
+                </ul>
             </section>
 
             <section id="experience">
