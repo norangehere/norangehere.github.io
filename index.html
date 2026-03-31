@@ -44,7 +44,7 @@
         /* Sidebar Layout */
         .layout {
             display: grid;
-            grid-template-columns: var(--sidebar-width) 1fr;
+            grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
             min-height: 100vh;
         }
 
@@ -166,8 +166,9 @@
 
         /* Main Content */
         .main {
-            margin-left: var(--sidebar-width);
+            grid-column: 2;
             padding: 3rem 4rem;
+            min-width: 0;
         }
 
         /* Section */
@@ -326,21 +327,108 @@
         }
 
         /* Honors */
-        .honors-list {
+        .honors-overview {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .honors-stat {
+            padding: 1rem 1.1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background:
+                linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(37, 99, 235, 0.02)),
+                var(--bg-secondary);
+        }
+
+        .honors-stat strong {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.45rem;
+            color: var(--text-primary);
+        }
+
+        .honors-stat span {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .honors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .honor-card {
+            position: relative;
+            padding: 1.15rem 1.2rem 1.15rem 1.35rem;
+            border: 1px solid var(--border);
+            border-radius: calc(var(--radius) + 2px);
+            background: var(--bg-primary);
+            box-shadow: 0 18px 40px -32px rgba(26, 26, 46, 0.45);
+            overflow: hidden;
+        }
+
+        .honor-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 4px;
+            background: linear-gradient(180deg, #2563eb, #60a5fa);
+        }
+
+        .honor-card-header {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.7rem;
         }
 
-        .honors-list li {
-            font-size: 0.95rem;
-            color: var(--text);
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border);
+        .honor-card h3 {
+            font-size: 0.96rem;
+            font-weight: 600;
+            line-height: 1.45;
         }
 
-        .honors-list li:last-child {
-            border-bottom: none;
+        .honor-year {
+            flex-shrink: 0;
+            padding: 0.28rem 0.62rem;
+            border-radius: 999px;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .honor-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .honor-meta span {
+            padding: 0.2rem 0.52rem;
+            border-radius: 999px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.72rem;
+            font-weight: 500;
+        }
+
+        .honor-note {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         /* Projects */
@@ -534,6 +622,7 @@
             }
 
             .main {
+                grid-column: auto;
                 margin-left: 0;
                 padding: 2rem 1.5rem;
             }
@@ -568,6 +657,15 @@
             .experience-item .period {
                 text-align: left;
             }
+
+            .honors-overview,
+            .honors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .honor-card-header {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -578,7 +676,6 @@
             <div class="sidebar-top">
                 <img src="photo.jpg" alt="Xiaoran Pan" class="avatar">
                 <h1>Xiaoran Pan</h1>
-                <p class="subtitle">Zhejiang University · Turing Class</p>
                 <p class="description">Passionate about artificial intelligence with a focus on MLLMs and Embodied AI. Currently working on AI for Science.</p>
                 <div class="links">
                     <a href="https://norangehere.github.io/zju-learning/" target="_blank" class="primary">
@@ -744,14 +841,93 @@
                     <h2>Awards & Honors</h2>
                     <div class="line"></div>
                 </div>
-                <ul class="honors-list">
-                    <li>Huawei Elite Scholarship — Only 3 recipients in college (2024)</li>
-                    <li>China International "Internet+" Innovation Competition — National Bronze Award (2024)</li>
-                    <li>Zhejiang Provincial Government Scholarship (2023, 2024)</li>
-                    <li>MCM/ICM Mathematical Contest in Modeling — Meritorious Winner (2024)</li>
-                    <li>Top-tier Foundation Scholarship, Computer Science (2023)</li>
-                    <li>National High School Mathematics Competition — Provincial First Prize (2020)</li>
-                </ul>
+                <!-- <div class="honors-overview">
+                    <div class="honors-stat">
+                        <strong>6</strong>
+                        <span>Selected honors across scholarships, national competitions, and mathematics awards.</span>
+                    </div>
+                    <div class="honors-stat">
+                        <strong>2020-2024</strong>
+                        <span>Recognition sustained from high-school competition achievements to undergraduate academic excellence.</span>
+                    </div>
+                    <div class="honors-stat">
+                        <strong>National + Provincial</strong>
+                        <span>Combines highly selective campus scholarships with recognized external competition results.</span>
+                    </div>
+                </div> -->
+                <div class="honors-grid">
+                    <article class="honor-card">
+                        <div class="honor-card-header">
+                            <h3>Huawei Elite Scholarship</h3>
+                            <span class="honor-year">2024</span>
+                        </div>
+                        <div class="honor-meta">
+                            <span>Scholarship</span>
+                            <span>Selective Honor</span>
+                        </div>
+                        <p class="honor-note">Only three recipients in the college, recognizing top-tier academic performance and overall excellence.</p>
+                    </article>
+
+                    <article class="honor-card">
+                        <div class="honor-card-header">
+                            <h3>China International &quot;Internet+&quot; Innovation Competition</h3>
+                            <span class="honor-year">2024</span>
+                        </div>
+                        <div class="honor-meta">
+                            <span>Competition</span>
+                            <span>National Bronze</span>
+                        </div>
+                        <p class="honor-note">Awarded at the national level for innovation-oriented project development and interdisciplinary execution.</p>
+                    </article>
+
+                    <article class="honor-card">
+                        <div class="honor-card-header">
+                            <h3>Zhejiang Provincial Government Scholarship</h3>
+                            <span class="honor-year">2023 / 2024</span>
+                        </div>
+                        <div class="honor-meta">
+                            <span>Scholarship</span>
+                            <span>Provincial Recognition</span>
+                        </div>
+                        <p class="honor-note">Received in consecutive years, reflecting consistent academic standing and sustained undergraduate performance.</p>
+                    </article>
+
+                    <article class="honor-card">
+                        <div class="honor-card-header">
+                            <h3>MCM/ICM Mathematical Contest in Modeling</h3>
+                            <span class="honor-year">2024</span>
+                        </div>
+                        <div class="honor-meta">
+                            <span>Competition</span>
+                            <span>Meritorious Winner</span>
+                        </div>
+                        <p class="honor-note">Recognized for strong quantitative modeling, problem decomposition, and technical communication in an international contest setting.</p>
+                    </article>
+
+                    <article class="honor-card">
+                        <div class="honor-card-header">
+                            <h3>Top-tier Foundation Scholarship, Computer Science</h3>
+                            <span class="honor-year">2023</span>
+                        </div>
+                        <div class="honor-meta">
+                            <span>Scholarship</span>
+                            <span>Computer Science</span>
+                        </div>
+                        <p class="honor-note">Awarded for exceptional foundational performance in core computer science coursework during undergraduate study.</p>
+                    </article>
+
+                    <article class="honor-card">
+                        <div class="honor-card-header">
+                            <h3>National High School Mathematics Competition</h3>
+                            <span class="honor-year">2020</span>
+                        </div>
+                        <div class="honor-meta">
+                            <span>Mathematics</span>
+                            <span>Provincial First Prize</span>
+                        </div>
+                        <p class="honor-note">Earned provincial first prize, highlighting an early and strong mathematical foundation before university-level research training.</p>
+                    </article>
+                </div>
             </section>
 
             <section id="experience">
@@ -766,17 +942,17 @@
                         <div>
                             <h4>Teaching Assistant</h4>
                             <p class="org">Zhejiang University, College of Computer Science</p>
-                            <p class="desc">Python Programming, Computer Systems I</p>
+                            <p class="desc">Python Programming, Computer Systems I, Computer Organization</p>
                         </div>
-                        <span class="period">2023 - 2025</span>
+                        <span class="period">2024 - 2025</span>
                     </div>
                     <div class="experience-item">
                         <div>
-                            <h4>X-Lab Software Team Member</h4>
-                            <p class="org">Zhejiang University</p>
+                            <h4>Software Team Member</h4>
+                            <p class="org">ZJU X-Lab(浙江大学启真交叉学科创新创业实验室)</p>
                             <p class="desc">Software development projects</p>
                         </div>
-                        <span class="period">2022 - Present</span>
+                        <span class="period">2023 - 2024</span>
                     </div>
                 </div>
 
@@ -788,7 +964,7 @@
                             <p class="org">Embodied AI · Vision-Language Navigation (VLN)</p>
                             <p class="desc">Building simulation environment frameworks for RL training and VLN</p>
                         </div>
-                        <span class="period">2025 - Present</span>
+                        <span class="period">2025.04 - 2025.09</span>
                     </div>
                 </div>
             </section>
