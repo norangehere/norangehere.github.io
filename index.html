@@ -21,6 +21,7 @@
             --border: #dee2e6;
             --radius: 12px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --sidebar-width: 320px;
         }
 
         * {
@@ -40,45 +41,119 @@
             line-height: 1.6;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        /* Sidebar Layout */
+        .layout {
+            display: grid;
+            grid-template-columns: var(--sidebar-width) 1fr;
+            min-height: 100vh;
         }
 
-        /* Navigation */
-        nav {
+        /* Sidebar */
+        .sidebar {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-            padding: 1rem 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            padding: 3rem 2rem;
+            border-right: 1px solid var(--border);
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
         }
 
-        nav .container {
+        .sidebar-top {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-primary);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar .description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar .links {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar .links a {
+            display: inline-flex;
             align-items: center;
-        }
-
-        nav .logo {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--text-primary);
+            gap: 0.5rem;
+            padding: 0.65rem 1rem;
+            border-radius: var(--radius);
             text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
         }
 
-        nav ul {
-            display: flex;
-            gap: 2rem;
+        .sidebar .links a.primary {
+            background: var(--text-primary);
+            color: white;
+        }
+
+        .sidebar .links a.primary:hover {
+            background: #2d2d4a;
+        }
+
+        .sidebar .links a.secondary {
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .sidebar .links a.secondary:hover {
+            border-color: var(--text-primary);
+        }
+
+        .sidebar .links svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            margin-top: auto;
+        }
+
+        .sidebar-nav ul {
             list-style: none;
         }
 
-        nav a {
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.5rem 0;
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
@@ -86,107 +161,39 @@
             transition: color 0.2s;
         }
 
-        nav a:hover {
+        .sidebar-nav a:hover {
             color: var(--accent);
         }
 
-        /* Hero Section */
-        .hero {
-            padding: 10rem 0 5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.75rem;
-        }
-
-        .hero .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero .links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .hero .links a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            border-radius: var(--radius);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .hero .links a.primary {
-            background: var(--text-primary);
-            color: white;
-        }
-
-        .hero .links a.primary:hover {
-            background: #2d2d4a;
-        }
-
-        .hero .links a.secondary {
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-        }
-
-        .hero .links a.secondary:hover {
-            border-color: var(--text-primary);
-        }
-
-        .hero .links svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Avatar */
-        .avatar {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--bg-primary);
-            box-shadow: var(--shadow);
+        /* Main Content */
+        .main {
+            margin-left: var(--sidebar-width);
+            padding: 3rem 4rem;
         }
 
         /* Section */
         section {
-            padding: 4rem 0;
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
             border-bottom: 1px solid var(--border);
         }
 
         section:last-child {
             border-bottom: none;
+            margin-bottom: 0;
         }
 
         .section-header {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .section-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .section-header .line {
@@ -198,68 +205,65 @@
         /* Education */
         .education-grid {
             display: grid;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .education-card {
             background: var(--bg-secondary);
             border-radius: var(--radius);
-            padding: 1.5rem 2rem;
+            padding: 1.25rem 1.5rem;
             border: 1px solid var(--border);
         }
 
         .education-card h3 {
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 0.25rem;
         }
 
         .education-card .school {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
         }
 
         .education-card .meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1rem;
             color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .education-card .meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+            font-size: 0.8rem;
         }
 
         .education-card .expected {
             display: inline-block;
             background: var(--accent-light);
             color: var(--accent);
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             margin-left: 0.5rem;
         }
 
-        /* Paper Card - Academic Format */
+        /* Paper Card */
         .paper-card {
             display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 1.5rem;
-            padding: 1.5rem 0;
+            grid-template-columns: 180px 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--border);
         }
 
         .paper-card:last-child {
             border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .paper-image {
-            width: 350px;
+            width: 180px;
             height: auto;
             background: var(--bg-secondary);
             border-radius: var(--radius);
@@ -267,11 +271,17 @@
             overflow: hidden;
         }
 
+        .paper-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .paper-content h3 {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             line-height: 1.4;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .paper-content h3 a {
@@ -285,9 +295,9 @@
         }
 
         .paper-authors {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .paper-authors .me {
@@ -296,48 +306,48 @@
         }
 
         .paper-venue {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .paper-venue .tag {
             display: inline-block;
             background: var(--accent-light);
             color: var(--accent);
-            padding: 0.2rem 0.6rem;
+            padding: 0.15rem 0.5rem;
             border-radius: 4px;
             font-weight: 500;
-            margin-right: 0.5rem;
+            margin-right: 0.4rem;
         }
 
         .paper-desc {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* Honors */
         .honors-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem;
         }
 
         .honor-item {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            padding: 1.25rem;
+            gap: 0.75rem;
+            padding: 1rem;
             background: var(--bg-secondary);
             border-radius: var(--radius);
             border: 1px solid var(--border);
         }
 
         .honor-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             background: var(--accent-light);
             display: flex;
             align-items: center;
@@ -346,41 +356,36 @@
         }
 
         .honor-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             color: var(--accent);
         }
 
         .honor-item h4 {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.15rem;
         }
 
         .honor-item p {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
 
         /* Projects */
         .projects-grid {
             display: grid;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .project-card {
             border: 1px solid var(--border);
             border-radius: var(--radius);
             overflow: hidden;
-            transition: box-shadow 0.2s;
-        }
-
-        .project-card:hover {
-            box-shadow: var(--shadow);
         }
 
         .project-header {
-            padding: 1.25rem 1.5rem;
+            padding: 1rem 1.25rem;
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -389,13 +394,13 @@
         }
 
         .project-header h3 {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
         }
 
         .project-header .status {
-            font-size: 0.75rem;
-            padding: 0.3rem 0.65rem;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
             background: var(--accent-light);
             color: var(--accent);
             border-radius: 20px;
@@ -403,106 +408,113 @@
         }
 
         .project-body {
-            padding: 1.5rem;
+            padding: 1.25rem;
         }
 
         .project-body p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.65;
-            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
         }
 
         .project-highlights {
             display: grid;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            margin-bottom: 0.75rem;
         }
 
         .project-highlights li {
             display: flex;
             align-items: flex-start;
-            gap: 0.75rem;
-            font-size: 0.85rem;
+            gap: 0.5rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
 
         .project-highlights li::before {
             content: '';
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
             background: var(--accent);
             border-radius: 50%;
-            margin-top: 0.45rem;
+            margin-top: 0.4rem;
             flex-shrink: 0;
         }
 
         .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-top: 1rem;
+            gap: 0.35rem;
         }
 
         .project-tags span {
-            padding: 0.25rem 0.6rem;
+            padding: 0.2rem 0.5rem;
             background: var(--bg-tertiary);
             border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
         }
 
         /* Experience */
         .experience-list {
             display: grid;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .experience-item {
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 1rem;
-            padding: 1.25rem;
+            padding: 1rem 1.25rem;
             background: var(--bg-secondary);
             border-radius: var(--radius);
             border: 1px solid var(--border);
         }
 
         .experience-item h4 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
 
         .experience-item .org {
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
         }
 
         .experience-item .desc {
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .experience-item .period {
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-align: right;
             white-space: nowrap;
+        }
+
+        .exp-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
         }
 
         /* Contact */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
             background: var(--bg-secondary);
             border-radius: var(--radius);
             border: 1px solid var(--border);
@@ -516,51 +528,57 @@
         }
 
         .contact-item svg {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             color: var(--text-muted);
         }
 
         .contact-item span {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         /* Footer */
         footer {
-            padding: 2.5rem 0;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         /* Mobile */
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-
-            .hero {
-                padding: 7rem 0 3rem;
-            }
-
-            .hero-content {
+        @media (max-width: 900px) {
+            .layout {
                 grid-template-columns: 1fr;
-                text-align: center;
             }
 
-            .hero h1 {
-                font-size: 2.25rem;
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 2rem 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
             }
 
-            .avatar {
-                width: 140px;
-                height: 140px;
-                margin: 0 auto 1.5rem;
+            .main {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
             }
 
-            .hero .links {
-                justify-content: center;
+            .sidebar-nav {
+                margin-top: 1.5rem;
+            }
+
+            .sidebar-nav ul {
+                display: flex;
                 flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .sidebar-nav li {
+                margin-bottom: 0;
             }
 
             .paper-card {
@@ -569,7 +587,7 @@
 
             .paper-image {
                 width: 100%;
-                height: 160px;
+                height: 120px;
             }
 
             .experience-item {
@@ -583,52 +601,47 @@
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">Xiaoran Pan</a>
-            <ul>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#honors">Awards</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1>Xiaoran Pan</h1>
-                        <p class="description">Passionate about artificial intelligence with a focus on MLLMs and Embodied AI. Currently working on AI for Science, aiming to leverage AI for scientific discovery.</p>
-                        <div class="links">
-                            <a href="https://norangehere.github.io/zju-learning/" target="_blank" class="primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
-                                Personal Notebook
-                            </a>
-                            <a href="mailto:pixe1ran9e@gmail.com" class="secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                                Contact Me
-                            </a>
-                        </div>
-                    </div>
-                    <img src="photo.jpg" alt="Xiaoran Pan" class="avatar">
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <img src="photo.jpg" alt="Xiaoran Pan" class="avatar">
+                <h1>Xiaoran Pan</h1>
+                <p class="subtitle">Zhejiang University · Turing Class</p>
+                <p class="description">Passionate about artificial intelligence with a focus on MLLMs and Embodied AI. Currently working on AI for Science.</p>
+                <div class="links">
+                    <a href="https://norangehere.github.io/zju-learning/" target="_blank" class="primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+                        Personal Notebook
+                    </a>
+                    <a href="mailto:pixe1ran9e@gmail.com" class="secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        Contact Me
+                    </a>
                 </div>
             </div>
-        </section>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#honors">Awards</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <section id="education">
-            <div class="container">
+        <!-- Main Content -->
+        <main class="main">
+            <section id="education">
                 <div class="section-header">
                     <h2>Education</h2>
                     <div class="line"></div>
                 </div>
                 <div class="education-grid">
                     <div class="education-card">
-                        <h3>Tsinghua University </h3>
+                        <h3>Tsinghua University <span class="expected">Expected Sep 2026</span></h3>
                         <p class="school">College AI · Computer Science and Technology</p>
                         <div class="meta">
                             <span>Incoming Ph.D.</span>
@@ -644,11 +657,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="publications">
-            <div class="container">
+            <section id="publications">
                 <div class="section-header">
                     <h2>Publications</h2>
                     <div class="line"></div>
@@ -656,50 +667,42 @@
 
                 <article class="paper-card">
                     <div class="paper-image" style="aspect-ratio: 1162/545;">
-                        <img src="brain4fm.png" alt="Brain4FMs" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+                        <img src="brain4fm.png" alt="Brain4FMs">
                     </div>
                     <div class="paper-content">
                         <h3><a href="https://arxiv.org/abs/2602.11558" target="_blank">Brain4FMs: A Benchmark of Foundation Models for Electrical Brain Signal</a></h3>
                         <p class="paper-authors">Fanqi Shen, Enhong Yang, Jiahe Li, Junru Hong, <span class="me">Xiaoran Pan</span>, Zhizhang Yuan, Meng Li, Yang Yang</p>
                         <p class="paper-venue"><span class="tag">arXiv</span>2026</p>
-                        <p class="paper-desc">
-                            Introduces a comprehensive benchmark for Brain Foundation Models (BFMs) on electrical brain signals, systematically evaluating mainstream foundation models on neural data. This work advances the AI + Neuroscience intersection.
-                        </p>
+                        <p class="paper-desc">Introduces a comprehensive benchmark for Brain Foundation Models (BFMs) on electrical brain signals, systematically evaluating mainstream foundation models on neural data.</p>
                     </div>
                 </article>
 
                 <article class="paper-card">
                     <div class="paper-image" style="aspect-ratio: 1148/687;">
-                        <img src="arcadia.png" alt="Arcadia" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+                        <img src="arcadia.png" alt="Arcadia">
                     </div>
                     <div class="paper-content">
                         <h3><a href="https://arxiv.org/abs/2512.00076" target="_blank">Arcadia: Toward a Full-Lifecycle Framework for Embodied Lifelong Learning</a></h3>
                         <p class="paper-authors">Minghe Gao, Juncheng Li, Yuze Lin, Xuqi Liu, Jiaming Ji, <span class="me">Xiaoran Pan</span>, Zihan Xu, Xian Li, Mingjie Li, Wei Ji, Rong Wei, Rui Tang, Qizhou Wang, Kai Shen, Jun Xiao, Qi Wu, Siliang Tang, Yueting Zhuang</p>
                         <p class="paper-venue"><span class="tag">NeurIPS</span>2025</p>
-                        <p class="paper-desc">
-                            Presents a full-lifecycle framework for embodied lifelong learning, innovatively unifying data collection, simulation, training, and deployment to address cross-domain generalization and continuous adaptation.
-                        </p>
+                        <p class="paper-desc">Presents a full-lifecycle framework for embodied lifelong learning, unifying data collection, simulation, training, and deployment.</p>
                     </div>
                 </article>
 
                 <article class="paper-card">
                     <div class="paper-image" style="aspect-ratio: 1302/579;">
-                        <img src="gresuite.png" alt="GRE Suite" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+                        <img src="gresuite.png" alt="GRE Suite">
                     </div>
                     <div class="paper-content">
                         <h3><a href="https://arxiv.org/abs/2505.18700" target="_blank">GRE Suite: Geo-localization Inference via Fine-Tuned Vision-Language Models and Enhanced Reasoning Chains</a></h3>
                         <p class="paper-authors">Chun Wang, Xiaojun Ye, <span class="me">Xiaoran Pan</span>, Zihao Wang, Haofan Wang, Yiren Song</p>
                         <p class="paper-venue"><span class="tag">CVPR</span>2025</p>
-                        <p class="paper-desc">
-                            Proposes a geo-localization inference framework based on fine-tuned Vision-Language Models (VLMs), achieving multi-granular visual cue extraction and reasoning through enhanced Reasoning Chains.
-                        </p>
+                        <p class="paper-desc">Proposes a geo-localization inference framework based on fine-tuned Vision-Language Models, achieving multi-granular visual cue extraction.</p>
                     </div>
                 </article>
-            </div>
-        </section>
+            </section>
 
-        <section id="projects">
-            <div class="container">
+            <section id="projects">
                 <div class="section-header">
                     <h2>Projects</h2>
                     <div class="line"></div>
@@ -708,14 +711,12 @@
                     <article class="project-card">
                         <div class="project-header">
                             <h3>Intelligent Archaeology Toolkit (智载千古)</h3>
-                            <span class="status">National Bronze Award · Patent</span>
+                            <span class="status">National Bronze · Patent</span>
                         </div>
                         <div class="project-body">
-                            <p>
-                                Developed an archaeology toolkit using image segmentation foundation models for document layout analysis and information extraction from archaeological reports.
-                            </p>
+                            <p>Developed an archaeology toolkit using image segmentation foundation models for document layout analysis and information extraction from archaeological reports.</p>
                             <ul class="project-highlights">
-                                <li>Collaborated with experts from Liangdu Museum and Liangdu Research Institute</li>
+                                <li>Collaborated with experts from Liangdu Museum</li>
                                 <li>Processing speed under 1 second per page with 85%+ accuracy</li>
                                 <li>Patent granted: CN119693633B</li>
                             </ul>
@@ -723,7 +724,6 @@
                                 <span>Computer Vision</span>
                                 <span>YOLO</span>
                                 <span>OCR</span>
-                                <span>Document Analysis</span>
                             </div>
                         </div>
                     </article>
@@ -731,12 +731,10 @@
                     <article class="project-card">
                         <div class="project-header">
                             <h3>H!PONG (嗨碰)</h3>
-                            <span class="status">Douyin AI Creator 2025 · Third Prize</span>
+                            <span class="status">Douyin AI 2025 · Third Prize</span>
                         </div>
                         <div class="project-body">
-                            <p>
-                                An AI-powered project developed for the Douyin AI Creator competition, creating innovative solutions through generative AI technologies.
-                            </p>
+                            <p>An AI-powered project developed for the Douyin AI Creator competition, creating innovative solutions through generative AI technologies.</p>
                             <ul class="project-highlights">
                                 <li>Awarded Third Prize among hundreds of competing teams</li>
                                 <li>Innovative application of AI in creative content generation</li>
@@ -754,27 +752,23 @@
                             <span class="status">SRTP Excellent</span>
                         </div>
                         <div class="project-body">
-                            <p>
-                                Addressed temporal artifacts in rendered videos by constructing a large-scale dataset ReVQ-2k (2,000 videos, 57,450 subjective ratings) and developing a dual-stream no-reference video quality assessment model.
-                            </p>
+                            <p>Constructed ReVQ-2k dataset (2,000 videos, 57,450 ratings) and developed a dual-stream no-reference video quality assessment model.</p>
                             <ul class="project-highlights">
                                 <li>Established OA-MOS and TS-MOS rating dimensions</li>
                                 <li>Proposed dual-stream model assessing frame quality and temporal consistency</li>
-                                <li>Project completed with "Excellent" rating</li>
+                                <li>Project completed with "Excellent" rating (top 30%)</li>
                             </ul>
                             <div class="project-tags">
-                                <span>Video Quality Assessment</span>
+                                <span>Video Quality</span>
                                 <span>Deep Learning</span>
                                 <span>Computer Graphics</span>
                             </div>
                         </div>
                     </article>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="honors">
-            <div class="container">
+            <section id="honors">
                 <div class="section-header">
                     <h2>Awards & Honors</h2>
                     <div class="line"></div>
@@ -786,7 +780,7 @@
                         </div>
                         <div>
                             <h4>Huawei Elite Scholarship</h4>
-                            <p>Only 3 recipients in Chu Kochen College (2023-2024)</p>
+                            <p>Only 3 recipients in college</p>
                         </div>
                     </div>
                     <div class="honor-item">
@@ -794,7 +788,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
                         </div>
                         <div>
-                            <h4>China International College Students' Innovation Competition</h4>
+                            <h4>China International Innovation Competition</h4>
                             <p>2024 National Bronze Award</p>
                         </div>
                     </div>
@@ -804,7 +798,7 @@
                         </div>
                         <div>
                             <h4>Zhejiang Provincial Government Scholarship</h4>
-                            <p>Awarded twice consecutively (2022-2023, 2023-2024)</p>
+                            <p>Awarded twice consecutively</p>
                         </div>
                     </div>
                     <div class="honor-item">
@@ -835,45 +829,35 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="experience">
-            <div class="container">
+            <section id="experience">
                 <div class="section-header">
                     <h2>Experience</h2>
                     <div class="line"></div>
                 </div>
 
-                <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 1rem;">Teaching</h4>
-                <div class="experience-list" style="margin-bottom: 2rem;">
+                <p class="exp-label">Teaching</p>
+                <div class="experience-list" style="margin-bottom: 1.5rem;">
                     <div class="experience-item">
                         <div>
                             <h4>Teaching Assistant</h4>
                             <p class="org">Zhejiang University, College of Computer Science</p>
-                            <p class="desc">Python Programming, Computer Systems I, Computer Organization</p>
+                            <p class="desc">Python Programming, Computer Systems I</p>
                         </div>
-                        <span class="period">2024 - 2026</span>
+                        <span class="period">2023 - 2025</span>
                     </div>
                     <div class="experience-item">
                         <div>
-                            <h4>Software Team Member</h4>
-                            <p class="org">ZJU X-Lab(浙江大学启真交叉学科创新创业实验室)</p>
+                            <h4>X-Lab Software Team Member</h4>
+                            <p class="org">Zhejiang University</p>
                             <p class="desc">Software development projects</p>
                         </div>
-                        <span class="period">2023 - 2024</span>
-                    </div>
-                    <div class="experience-item">
-                        <div>
-                            <h4>AI Student Mentor Lead</h4>
-                            <p class="org">Zhejiang University</p>
-                            <p class="desc">Academic tutoring and technical sharing</p>
-                        </div>
-                        <span class="period">2024 - 2025</span>
+                        <span class="period">2022 - Present</span>
                     </div>
                 </div>
 
-                <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 1rem;">Internship</h4>
+                <p class="exp-label">Internship</p>
                 <div class="experience-list">
                     <div class="experience-item">
                         <div>
@@ -881,14 +865,12 @@
                             <p class="org">Embodied AI · Vision-Language Navigation (VLN)</p>
                             <p class="desc">Building simulation environment frameworks for RL training and VLN</p>
                         </div>
-                        <span class="period">2025.04 - 2025.09</span>
+                        <span class="period">2025 - Present</span>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="contact">
-            <div class="container">
+            <section id="contact">
                 <div class="section-header">
                     <h2>Contact</h2>
                     <div class="line"></div>
@@ -902,19 +884,13 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
                         <span>GitHub: norangehere</span>
                     </a>
-                    <a href="https://norangehere.github.io/zju-learning/" target="_blank" class="contact-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
-                        <span>Personal Notes Site</span>
-                    </a>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Xiaoran Pan. Zhejiang University.</p>
-        </div>
-    </footer>
+            <footer>
+                <p>&copy; 2026 Xiaoran Pan. Zhejiang University.</p>
+            </footer>
+        </main>
+    </div>
 </body>
 </html>
